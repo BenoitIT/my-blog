@@ -3,8 +3,10 @@ import { PrismaClient } from "@prisma/client";
 import usersRouter from "./routes/userRoutes";
 import { errorHandler } from "./middlewares/errorRenderer";
 import postsRouter from "./routes/postRoutes";
+import cors from "cors"
 
 const app: Express = express();
+app.use(cors());
 app.use(express.json());
 //routes
 app.use("/api/v1/", usersRouter);

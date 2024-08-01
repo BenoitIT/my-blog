@@ -5,6 +5,7 @@ import UsersBlog from "./pages/userBlogs";
 import Signup from "./pages/signup";
 import SignIn from "./pages/signIn";
 import NewBlog from "./pages/newblog";
+import SingleBlog from "./pages/singlePost";
 function App() {
   return (
     <Router>
@@ -25,6 +26,12 @@ function App() {
           </Route>
           <Route path="/newblog">
             <NewBlog />
+          </Route>
+          <Route path="/blog/:id">
+            <SingleBlog />
+          </Route>
+          <Route path="*">
+            <div>The page you have requested has no contents</div>
           </Route>
         </Switch>
       </div>

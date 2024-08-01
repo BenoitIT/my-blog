@@ -1,8 +1,14 @@
 import { IoIosMenu } from "react-icons/io";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 const NavBar = () => {
   const loaction = useLocation().pathname;
+  const handleLogout = () => {
+    Cookies.remove("authToken");
+    Cookies.remove("username");
+    window.location.href = "/";
+  };
   return (
     <nav className="bg-[#008282] border-gray-200 sticky top-0">
       <div className="w-full flex  justify-between  py-4 px-[8vw]">
@@ -32,31 +38,45 @@ const NavBar = () => {
                 Home
               </Link>
             </li>
-
-            <li>
-              <Link
-                to={"/myblogs"}
-                className={loaction == "/myblogs" ? "font-bold" : ""}
-              >
-                My posts
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/signin"}
-                className={loaction == "/signin" ? "font-bold" : ""}
-              >
-                Sign In
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/signup"}
-                className={loaction == "/signup" ? "font-bold" : ""}
-              >
-                Sign Up
-              </Link>
-            </li>
+            {Cookies.get("authToken") ? (
+              <>
+                <li>
+                  <Link
+                    to={"/myblogs"}
+                    className={loaction == "/myblogs" ? "font-bold" : ""}
+                  >
+                    My posts
+                  </Link>
+                </li>
+                <li>
+                  <p onClick={handleLogout} className="hover:cursor-pointer hover:font-bold">Sign out</p>
+                </li>
+                <li>
+                  <Link to={""} className="capitalize">
+                    {Cookies.get("username")}
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to={"/signin"}
+                    className={loaction == "/signin" ? "font-bold" : ""}
+                  >
+                    Sign in
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/signup"}
+                    className={loaction == "/signup" ? "font-bold" : ""}
+                  >
+                    Sign Up
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
