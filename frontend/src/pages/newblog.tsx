@@ -2,11 +2,27 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/button";
 import Input, { CustomTextArea } from "../components/Input";
+import withAuthRedirect from "../components/withOuth";
+import { useMutation } from "@tanstack/react-query";
+import { createPost } from "../services/posts";
 
 const NewBlog = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
-
+  const mutation = useMutation({
+    mutationFn: createPost,
+    onSuccess: (data: any) => {
+      alert(data);
+      setTitle("");
+      setContent("");
+    },
+    onError: () => {
+      alert("Some thing went wrong");
+    },
+  });
+  const handleSubmit = () => {
+    mutation.mutate({ title,content});
+  };
   return (
     <section className="bg-gradient-to-b from-gray-300 to-white">
       <div className="w-full">
@@ -18,7 +34,6 @@ const NewBlog = () => {
                 Blogerz.
               </Link>
             </p>
-            <form>
               <div className="flex flex-wrap -mx-3 mb-4 gap-3">
                 <Input
                   type="text"
@@ -39,10 +54,10 @@ const NewBlog = () => {
                   <Button
                     extrastyle="btn text-white bg-[#008282] hover:bg-[#008289] w-full px-3 py-2 rounded-full"
                     label="Save"
+                    click={handleSubmit}
                   />
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>
@@ -50,4 +65,4 @@ const NewBlog = () => {
   );
 };
 
-export default NewBlog;
+export default withAuthRedirect(NewBlog);

@@ -7,7 +7,7 @@ export const getAllPosts = async (
   res: Response
 ): Promise<any> => {
   const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 10;
+  const limit = parseInt(req.query.limit as string) || 5;
   // Calculate the offset
   const offset = (page - 1) * limit;
   // Fetch the total count of posts
@@ -16,6 +16,9 @@ export const getAllPosts = async (
   const posts = await prismaClient.post.findMany({
     skip: offset,
     take: limit,
+    include: {
+      author: true,
+    },
   });
   // Calculate the total number of pages
   const totalPages = Math.ceil(totalPosts / limit);
@@ -69,7 +72,7 @@ export const createPost = async (
 };
 
 export const getAllPostsByUser = async (
-  req: Request|any,
+  req: Request | any,
   res: Response
 ): Promise<any> => {
   const userId = req.user?.userId;
@@ -104,4 +107,80 @@ export const getAllPostsByUser = async (
       limit,
     },
   });
+};
+
+//view a single post
+
+export const getSinglePost = async (
+  req: Request,
+  res: Response
+): Promise<any> => {
+  const { postid } = req.params;
+
+  try {
+    const post = await prismaClient.post.findUnique({
+      where: { id: Number(postid) },
+      include: {
+        author: true,
+        comments:true
+      },
+    });
+
+    if (!post) {
+      return res.status(404).json({ status: 404, message: "Post not found" });
+    }
+
+    return res.json({ status: 200, data: post });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ status: 500, message: "Server error", error });
+  }
+};
+//delete a single post
+
+export const deletePost = async (req: Request, res: Response): Promise<any> => {
+  const { postid } = req.params;
+
+  try {
+    const deletedPost = await prismaClient.post.delete({
+      where: { id: Number(postid) },
+    });
+
+    return res.json({
+      status: 200,
+      message: "Post deleted successfully",
+      data: deletedPost,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ status: 500, message: "Server error", error });
+  }
+};
+
+//update post info
+export const updatePost = async (req: Request, res: Response): Promise<any> => {
+  const { postid } = req.params;
+  const { title, content } = req.body;
+
+  try {
+    const updatedPost = await prismaClient.post.update({
+      where: { id: Number(postid) },
+      data: {
+        title,
+        content,
+      },
+    });
+
+    return res.json({
+      status: 200,
+      message: "Post updated successfully",
+      data: updatedPost,
+    });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ status: 500, message: "Server error", error });
+  }
 };
