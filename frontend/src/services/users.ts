@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 export type SignUpUserInput = {
   email: string;
   password: string;
@@ -22,7 +23,7 @@ export const signUpUser = async ({
   password,
   name,
 }: SignUpUserInput): Promise<any> => {
-  const response = await fetch("http://localhost:3000/api/v1/users/signup", {
+  const response = await fetch(`${apiUrl}/api/v1/users/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +41,7 @@ export const signUpUser = async ({
 export const loginUser = async (
   input: LoginUserInput
 ): Promise<LoginUserResponse> => {
-  const response = await fetch("http://localhost:3000/api/v1/users/login", {
+  const response = await fetch(`${apiUrl}/api/v1/users/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

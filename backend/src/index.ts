@@ -16,4 +16,4 @@ export const prismaClient = new PrismaClient({
 });
 // Error handling middleware
 app.use(errorHandler);
-app.listen(3000, () => console.log("app has started successfully"));
+app.listen(3000, () => console.log("app has started successfully on 3000 Port "));

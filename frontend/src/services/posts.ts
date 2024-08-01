@@ -1,7 +1,9 @@
 import Cookies from "js-cookie";
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
 export const fetchPosts = async (limit: number) => {
   const response = await fetch(
-    `http://localhost:3000/api/v1/posts?limit=${limit}`
+    `${apiUrl}/api/v1/posts?limit=${limit}`
   );
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -11,7 +13,7 @@ export const fetchPosts = async (limit: number) => {
 };
 export const fetchAuthUserPosts = async (limit: number) => {
   const response = await fetch(
-    `http://localhost:3000/api/v1/user/posts?limit=${limit}`,
+    `${apiUrl}/api/v1/user/posts?limit=${limit}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +29,7 @@ export const fetchAuthUserPosts = async (limit: number) => {
 };
 
 export  const fetchPostById = async (postId: number) => {
-  const response = await fetch(`http://localhost:3000/api/v1/post/${postId}`);
+  const response = await fetch(`${apiUrl}/api/v1/post/${postId}`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -41,7 +43,7 @@ interface CommentData {
 }
 
 export const postComment = async (commentData: CommentData) => {
-  const response = await fetch(`http://localhost:3000/api/v1/post/${commentData.postId}/comment`, {
+  const response = await fetch(`${apiUrl}/api/v1/post/${commentData.postId}/comment`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -67,7 +69,7 @@ interface PostData {
 }
 
 export const createPost = async (postData: PostData) => {
-  const response = await fetch('http://localhost:3000/api/v1/posts', {
+  const response = await fetch(`${apiUrl}/api/v1/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
