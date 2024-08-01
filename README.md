@@ -3,7 +3,7 @@
 # Simple Blog Application
 
 ## Overview
-This project is a simple blog application developed as part of a QT Practical Test for Software Developers (Interns). It features user authentication, blog post management, and comment functionality.
+This project is a simple blog application. It features user authentication, blog post management, and comment functionality.
 
 ## Technologies Used
 - **Frontend:** React.js
