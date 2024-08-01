@@ -4,13 +4,13 @@ import BlogCard from "../components/Card";
 
 const HomePage = () => {
   return (
-    <section className="py-24 w-screen flex justify-center">
+    <section className=" w-full flex justify-center">
       <div className="bg-white w-fit p-8 rounded shadow-sm">
         <div className="flex justify-center flex-wrap md:flex-wrap lg:flex-row lg:justify-between gap-8">
           <div className="w-full flex justify-between flex-col">
             <div className="block lg:text-left text-center">
               <h2 className="text-4xl font-bold text-gray-700 leading-[3.25rem] mb-5">
-                Our latest <span className=" text-[#008282]">blogs</span>
+                Latest <span className=" text-[#008282]">blogs</span>
               </h2>
               <p className="text-gray-500 mb-10 max-w-[800px]">
                 Welcome to our blog section, where knowledge meets inspiration.
