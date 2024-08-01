@@ -5,11 +5,7 @@ import { timestampFormatter } from "../utilities/timeStampFormatter";
 import Input from "../components/Input";
 import { useState } from "react";
 import Button from "../components/button";
-<<<<<<< HEAD
-const queryClient = new QueryClient();
-=======
 import Cookies from "js-cookie";
->>>>>>> 339c907 (api integration on both users, posts and authentication)
 const SingleBlog = () => {
   const params: any = useParams();
   const [comment, setComment] = useState("");
@@ -57,22 +53,6 @@ const SingleBlog = () => {
               Written at: <span>{timestampFormatter(data?.createdAt)}</span>
             </p>
           </div>
-<<<<<<< HEAD
-          <Input
-            type="text"
-            label="Write a comment"
-            change={setComment}
-            value={comment}
-            placeholder="type..."
-          />
-          <div className="w-full">
-            <Button
-              label="Save"
-              extrastyle="border rounded-xl py-2 px-4 ml-3"
-              click={handleSubmit}
-            />
-          </div>
-=======
           {Cookies.get("authToken") ? (
             <>
               <Input
@@ -93,7 +73,6 @@ const SingleBlog = () => {
           ) : (
             ""
           )}
->>>>>>> 339c907 (api integration on both users, posts and authentication)
           <p className="font-medium text-gray-600 ml-3">
             Comments {`(${data.comments.length})`}
           </p>
