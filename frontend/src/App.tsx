@@ -1,9 +1,9 @@
-import "./App.css";
+import HomePage from "./pages/home";
 
 function App() {
   return (
-    <div className="text-center font-bold flex justify-center h-screen w-screen text-3xl">
-      My blog app
+    <div className="w-full min-h-screen bg-gray-100">
+      <HomePage />
     </div>
   );
 }
