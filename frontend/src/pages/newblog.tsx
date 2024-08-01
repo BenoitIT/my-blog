@@ -11,8 +11,8 @@ const NewBlog = () => {
   const [content, setContent] = useState<string>("");
   const mutation = useMutation({
     mutationFn: createPost,
-    onSuccess: (data: any) => {
-      alert(data);
+    onSuccess: () => {
+      alert("Post is created successfully");
       setTitle("");
       setContent("");
     },

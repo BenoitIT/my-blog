@@ -43,10 +43,10 @@ const HomePage = () => {
               <BlogCard
                 id={blog.id}
                 key={index}
-                title={blog.title}
-                contents={blog.content}
-                author={blog.author.name}
-                timeStamp={blog.createdAt}
+                title={blog?.title}
+                contents={blog?.content}
+                author={blog?.author?.name}
+                timeStamp={blog?.createdAt}
               />
             ))
           )}
