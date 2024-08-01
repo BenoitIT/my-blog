@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { DummyBlogs } from "../assets/dummyData";
 import Button from "../components/button";
 import BlogCard from "../components/Card";
@@ -12,10 +13,12 @@ const UsersBlog = () => {
               <h2 className="text-4xl font-bold text-gray-700 leading-[3.25rem] mb-5">
                 My <span className=" text-[#008282]">blogs</span>
               </h2>
-              <Button
-                label="Create new blog"
-                extrastyle=" border rounded-full bg-gray-200 border-[#008282] h-fit py-2 px-4"
-              />
+              <Link to="/newblog">
+                <Button
+                  label="Create new blog"
+                  extrastyle=" border rounded-full bg-gray-200 border-[#008282] h-fit py-2 px-4"
+                />
+              </Link>
             </div>
           </div>
         </div>

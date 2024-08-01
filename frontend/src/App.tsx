@@ -2,6 +2,9 @@ import NavBar from "./components/NavBar";
 import HomePage from "./pages/home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UsersBlog from "./pages/userBlogs";
+import Signup from "./pages/signup";
+import SignIn from "./pages/signIn";
+import NewBlog from "./pages/newblog";
 function App() {
   return (
     <Router>
@@ -15,10 +18,13 @@ function App() {
             <UsersBlog />
           </Route>
           <Route path="/signup">
-            <div>hello</div>
+            <Signup />
           </Route>
           <Route path="/signin">
-            <div>login</div>
+            <SignIn />
+          </Route>
+          <Route path="/newblog">
+            <NewBlog />
           </Route>
         </Switch>
       </div>
